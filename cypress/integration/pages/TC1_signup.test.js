@@ -1,7 +1,6 @@
 const faker = require("faker")
 const user = './cypress/integration/user.json'
-//const {selectors}=require('../selectors/TC1')
-
+const selector = require('../selectors/TC1')
 
 describe("Creating new user", () => {
     it("Visit site", () => {
@@ -13,20 +12,20 @@ describe("Creating new user", () => {
         let phone = "0197" + Math.floor(Math.random() * (9999999 - 1000000) + 1)
         let password = faker.random.alphaNumeric(8)
         let email = faker.internet.email()
-        cy.get(".login").click()
-        cy.get("#email_create").type(email)
-        cy.get("#SubmitCreate", { timeout: 10000 }).should('be.visible').click()
-        cy.get("#id_gender1", { timeout: 10000 }).should('be.visible').click()
-        cy.get("#customer_firstname").type(faker.name.firstName())
-        cy.get("#customer_lastname").type(faker.name.lastName())
-        cy.get("#passwd").type(password)
-        cy.get('#address1').type(faker.address.streetAddress())
-        cy.get('#city').type(faker.address.city())
-        cy.get('#id_state').select(`${Math.floor(Math.random() * (45 - 1) + 1)}`)
-        cy.get("#postcode").type("10001")
-        cy.get('#phone_mobile').type(phone)
-        cy.get('#alias').clear().type("Sherlock")
-        cy.get("#submitAccount", { timeout: 10000 }).should('be.visible').click()
+        cy.get(selector.btnSignIn).click()
+        cy.get(selector.fieldEmail).type(email)
+        cy.get(selector.doSubmit, { timeout: 10000 }).should('be.visible').click()
+        cy.get(selector.btnGender, { timeout: 10000 }).should('be.visible').click()
+        cy.get(selector.firstName).type(faker.name.firstName())
+        cy.get(selector.lastName).type(faker.name.lastName())
+        cy.get(selector.pass).type(password)
+        cy.get(selector.address).type(faker.address.streetAddress())
+        cy.get(selector.city).type(faker.address.city())
+        cy.get(selector.state).select(`${Math.floor(Math.random() * (45 - 1) + 1)}`)
+        cy.get(selector.zipcode).type("10001")
+        cy.get(selector.phone).type(phone)
+        cy.get(selector.alias).clear().type("Sherlock")
+        cy.get(selector.btnCreate, { timeout: 10000 }).should('be.visible').click()
         cy.contains("Sign out")
 
         cy.readFile(user).then((obj) => {

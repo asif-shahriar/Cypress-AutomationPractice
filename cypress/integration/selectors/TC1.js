@@ -1,4 +1,4 @@
-const selectors = {
+module.exports = {
 
     btnSignIn: ".login",
     fieldEmail: "#email_create",
@@ -17,4 +17,3 @@ const selectors = {
 
 }
 
-module.export = { selectors }
