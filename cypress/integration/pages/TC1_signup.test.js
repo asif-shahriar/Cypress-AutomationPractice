@@ -1,5 +1,4 @@
 const faker = require("faker")
-const user = './cypress/integration/user.json'
 const selector = require('../selectors/TC1')
 
 describe("Creating new user", () => {
@@ -28,10 +27,10 @@ describe("Creating new user", () => {
         cy.get(selector.btnCreate, { timeout: 10000 }).should('be.visible').click()
         cy.contains("Sign out")
 
-        cy.readFile(user).then((obj) => {
+        cy.readFile('cypress/fixtures/user.json').then((obj) => {
             obj.email = email
             obj.password = password
-            cy.writeFile(user, obj)
+            cy.writeFile('cypress/fixtures/user.json', obj)
         })
     })
 })

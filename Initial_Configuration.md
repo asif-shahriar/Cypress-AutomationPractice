@@ -36,6 +36,15 @@ npx cypress open
 ```
 npx cypress run --spec ./cypress/integration/* --headless --browser=firefox
 ```
+## Run the cycle for multiple iteration
+* Firstly, install cypress-repeat
+```
+npm i cypress-repeat
+```
+* Give following command to run the cycle for multiple times
+```
+npx cypress-repeat run -n 2 --spec ./cypress/integration/* --headless --browser=firefox
+```
 ## Allure configuration
 * Open terminal in the root folder
 * Give following command

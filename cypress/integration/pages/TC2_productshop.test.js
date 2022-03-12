@@ -1,14 +1,18 @@
 require('cypress-xpath')
-const user = './cypress/integration/user.json'
 
 describe("Product purchase with newly created user", () => {
+    let userDetails;
+    beforeEach(() => {
+        cy.fixture('user').then((users) => {
+            userDetails = users
+        })
+    })
+
     it("Purchase two products", () => {
         cy.visit("http://automationpractice.com/index.php")
         cy.get(".login").click();
-        cy.readFile(user).then((obj) => {
-            cy.get("#email").type(obj.email);
-            cy.get("#passwd").type(obj.password);
-        })
+        cy.get("#email").type(userDetails.email)
+        cy.get("#passwd").type(userDetails.password)
         cy.get("#SubmitLogin", { timeout: 10000 }).should('be.visible').click();
         cy.xpath("//input[@id='search_query_top']", { timeout: 10000 }).should('be.visible').type("dress")
         cy.get("[name=submit_search]").click()
